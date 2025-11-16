@@ -10,8 +10,8 @@ function convertToObject(sourceString) {
   const clearStyleString = newStyleString.filter((clearString) => {
     return clearString.trim().length > 0;
   });
-  const filtering = clearStyleString.map((a) => {
-    const [key, value] = a.split(':');
+  const stylePairs = clearStyleString.map((declaration) => {
+    const [key, value] = declaration.split(':');
 
     return {
       key: key.trim(),
@@ -19,10 +19,10 @@ function convertToObject(sourceString) {
     };
   });
 
-  const lastFiltering = filtering.reduce((result, { key, value }) => {
-    result[key] = value;
+  const lastFiltering = stylePairs.reduce((styleObject, { key, value }) => {
+    styleObject[key] = value;
 
-    return result;
+    return styleObject;
   }, {});
 
   return lastFiltering;
