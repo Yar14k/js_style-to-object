@@ -18,13 +18,14 @@ function convertToObject(sourceString) {
       value: value.trim(),
     };
   });
-  const result = {};
 
-  filtering.forEach(({ key, value }) => {
+  const lastFiltering = filtering.reduce((result, { key, value }) => {
     result[key] = value;
-  });
 
-  return result;
+    return result;
+  }, {});
+
+  return lastFiltering;
 }
 
 module.exports = convertToObject;
